@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arefin Foysal | Multi-Stack Architect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        :root {
+            --deep-void: #0a0a0f;
+            --void-dark: #050508;
+            --void-light: #12121a;
+            --neon-cyan: #00f3ff;
+            --neon-cyan-glow: rgba(0, 243, 255, 0.7);
+            --crimson-red: #ff003c;
+            --crimson-glow: rgba(255, 0, 60, 0.7);
+            --text-primary: #e0e0ff;
+            --text-secondary: #a0a0c0;
+            --terminal-green: #00ff9d;
+            --grid-line: rgba(0, 243, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--deep-void);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Matrix Rain Background */
+        #matrixRain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--crimson-red);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: 2px 0 var(--neon-cyan);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(40px, 9999px, 86px, 0); }
+            95% { clip: rect(45px, 9999px, 72px, 0); }
+            100% { clip: rect(23px, 9999px, 49px, 0); }
+        }
+
+        /* Terminal Typing Effect */
+        .typing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+            margin: 20px 0;
+        }
+
+        .typing-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan-glow);
+            border-right: 3px solid var(--neon-cyan);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-cyan) }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--neon-cyan);
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan-glow);
+            background-color: var(--void-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 2.2rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan-glow);
+            letter-spacing: 2px;
+        }
+
+        .logo-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--void-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--terminal-green);
+            box-shadow: 0 0 10px var(--terminal-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .hero-info {
+            padding-right: 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-cyan-glow);
+        }
+
+        .hero-title span {
+            color: var(--crimson-red);
+            text-shadow: 0 0 15px var(--crimson-glow);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            border-left: 3px solid var(--crimson-red);
+            padding-left: 15px;
+        }
+
+        .hero-terminal {
+            background-color: var(--void-light);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background-color: #ff5f57; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #28ca42; }
+
+        .terminal-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .terminal-content {
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        .terminal-line {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .terminal-prompt {
+            color: var(--terminal-green);
+            margin-right: 10px;
+        }
+
+        .terminal-command {
+            color: var(--text-primary);
+        }
+
+        .terminal-output {
+            color: var(--text-secondary);
+            margin-left: 20px;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan-glow);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+        }
+
+        .skills-container {
+            background-color: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+
+        .skill-marquee {
+            display: flex;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-top: 1px solid rgba(0, 243, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .skill-row {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .skill-row:hover {
+            animation-play-state: paused;
+        }
+
+        .skill-item {
+            background-color: rgba(0, 243, 255, 0.1);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: var(--neon-cyan);
+            padding: 8px 15px;
+            margin: 0 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background-color: rgba(0, 243, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .skill-row:nth-child(2) {
+            animation-direction: reverse;
+            animation-duration: 25s;
+        }
+
+        .skill-row:nth-child(3) {
+            animation-duration: 35s;
+        }
+
+        .skill-row:nth-child(4) {
+            animation-direction: reverse;
+            animation-duration: 40s;
+        }
+
+        .skill-row:nth-child(5) {
+            animation-duration: 20s;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .power-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .power-block {
+            background-color: var(--void-light);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .power-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--neon-cyan);
+        }
+
+        .power-block:nth-child(2)::before {
+            background-color: var(--crimson-red);
+        }
+
+        .power-block:nth-child(3)::before {
+            background-color: var(--terminal-green);
+        }
+
+        .power-block:nth-child(4)::before {
+            background-color: #ffaa00;
+        }
+
+        .power-block:nth-child(5)::before {
+            background-color: #9d00ff;
+        }
+
+        .power-block:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 25px rgba(0, 243, 255, 0.2);
+        }
+
+        .block-title {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .block-icon {
+            font-size: 1.2rem;
+        }
+
+        .block-list {
+            list-style-type: none;
+        }
+
+        .block-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .block-list li:before {
+            content: '>';
+            color: var(--neon-cyan);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-bottom: 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background-color: var(--void-light);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 243, 255, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--neon-cyan);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-cyan-glow);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Map */
+        .map-section {
+            margin-bottom: 60px;
+        }
+
+        .map-container {
+            background-color: var(--void-light);
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 30px;
+        }
+
+        .map-visual {
+            height: 300px;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .map-node {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .map-node:hover {
+            transform: scale(1.2);
+            z-index: 3;
+        }
+
+        .map-node.rangpur {
+            top: 50%;
+            left: 20%;
+            background-color: rgba(0, 243, 255, 0.2);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px var(--neon-cyan-glow);
+        }
+
+        .map-node.dhaka {
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 0, 60, 0.2);
+            border: 2px solid var(--crimson-red);
+            box-shadow: 0 0 20px var(--crimson-glow);
+        }
+
+        .map-node.global {
+            top: 50%;
+            right: 20%;
+            background-color: rgba(0, 255, 157, 0.2);
+            border: 2px solid var(--terminal-green);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.7);
+        }
+
+        .node-icon {
+            font-size: 1.5rem;
+        }
+
+        .node-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .connection {
+            position: absolute;
+            height: 3px;
+            background-color: var(--neon-cyan);
+            transform-origin: 0 0;
+            z-index: 1;
+        }
+
+        .connection.pulse {
+            animation: connection-pulse 3s infinite;
+        }
+
+        @keyframes connection-pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--void-light);
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 40px 0;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--neon-cyan);
+        }
+
+        .contact-list {
+            list-style-type: none;
+        }
+
+        .contact-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 243, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(0, 243, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background-color: var(--neon-cyan);
+            color: var(--deep-void);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .encryption-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            color: var(--terminal-green);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .hero-info {
+                padding-right: 0;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            
+            .power-blocks {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .typing-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <canvas id="matrixRain"></canvas>
+    <div class="grid-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="https://avatars.githubusercontent.com/u/92651211?v=4" alt="Arefin Foysal">
+                </div>
+                <div class="logo-text">
+                    <h1 class="glitch" data-text="AREFIN FOYSAL">AREFIN FOYSAL</h1>
+                    <p>THE MULTI-STACK ARCHITECT</p>
+                </div>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>SYSTEMS ONLINE</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-info">
+                <h1 class="hero-title">CYBERPUNK <span>COMMAND CENTER</span></h1>
+                <p class="hero-subtitle">Senior Software Engineer & Ad-Operations Architect specializing in high-performance monetization systems, cybersecurity protocols, and full-stack development.</p>
+                
+                <!-- Typing Effect -->
+                <div class="typing-container">
+                    <div class="typing-text" id="typingText"></div>
+                </div>
+                
+                <div class="hero-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="terminal-title">terminal.exe — Arefin_Foysal — zsh</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$ whoami</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">> Arefin Foysal | Multi-Stack Architect | HSC 2026 @ Cantonment Public School & College, Rangpur</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$ cat interests.txt</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">> Moto-Vlogging (Bike Riding) | Global Exploration (Travel) | Melodic Engineering (Music)</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$ status --system</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">> [✓] Ad-Tech Systems Online | [✓] Security Protocols Active | [✓] Development Stack Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-title">expertise_matrix.exe — SKILLS DATABASE</div>
+                </div>
+                <div class="terminal-content">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ load --skills --category all</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> Loading 500+ technical competencies...</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> [████████████████████] 100%</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ display --powerblocks</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> 1. Ad-Tech & Monetization (Core)</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> 2. Advanced Digital Marketing</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> 3. Cyber Security & Red Teaming</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> 4. Web Development & App Engineering</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> 5. Creative & Media Production</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ connect --client</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">> Establishing secure connection... Ready for collaboration.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <h2 class="section-title">EXPERTISE MATRIX</h2>
+            
+            <!-- Skill Marquees -->
+            <div class="skills-container">
+                <div class="skill-marquee">
+                    <div class="skill-row" id="skillRow1"></div>
+                </div>
+                <div class="skill-marquee">
+                    <div class="skill-row" id="skillRow2"></div>
+                </div>
+                <div class="skill-marquee">
+                    <div class="skill-row" id="skillRow3"></div>
+                </div>
+                <div class="skill-marquee">
+                    <div class="skill-row" id="skillRow4"></div>
+                </div>
+                <div class="skill-marquee">
+                    <div class="skill-row" id="skillRow5"></div>
+                </div>
+            </div>
+            
+            <!-- Power Blocks -->
+            <div class="power-blocks">
+                <div class="power-block">
+                    <h3 class="block-title"><i class="fas fa-chart-line block-icon"></i> Ad-Tech & Monetization</h3>
+                    <ul class="block-list" id="adTechList"></ul>
+                </div>
+                
+                <div class="power-block">
+                    <h3 class="block-title"><i class="fas fa-bullseye block-icon"></i> Advanced Digital Marketing</h3>
+                    <ul class="block-list" id="marketingList"></ul>
+                </div>
+                
+                <div class="power-block">
+                    <h3 class="block-title"><i class="fas fa-shield-alt block-icon"></i> Cyber Security & Red Teaming</h3>
+                    <ul class="block-list" id="securityList"></ul>
+                </div>
+                
+                <div class="power-block">
+                    <h3 class="block-title"><i class="fas fa-code block-icon"></i> Web Development & App Engineering</h3>
+                    <ul class="block-list" id="devList"></ul>
+                </div>
+                
+                <div class="power-block">
+                    <h3 class="block-title"><i class="fas fa-photo-video block-icon"></i> Creative & Media</h3>
+                    <ul class="block-list" id="creativeList"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <h2 class="section-title">OPERATIONAL METRICS</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-server"></i></div>
+                    <div class="stat-number" id="serversCounter">0</div>
+                    <div class="stat-label">Servers Secured</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="stat-number" id="revenueCounter">0</div>
+                    <div class="stat-label">Ad Revenue Managed</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="stat-number" id="campaignsCounter">0</div>
+                    <div class="stat-label">Campaigns Optimized</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-code"></i></div>
+                    <div class="stat-number" id="codeCounter">0</div>
+                    <div class="stat-label">Code Lines Written</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map -->
+        <section class="map-section">
+            <h2 class="section-title">OPERATIONAL PRESENCE</h2>
+            <div class="map-container">
+                <div class="map-title">RANGPUR → DHAKA → GLOBAL PRESENCE</div>
+                <div class="map-visual" id="interactiveMap">
+                    <!-- Map nodes will be positioned here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SECURE CONNECTION</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <strong>Encrypted Email</strong><br>
+                                arefinfoysalalif@gmail.com
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <strong>Secure WhatsApp</strong><br>
+                                +8801346755866
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Command Center</strong><br>
+                                Cantonment Public School & College, Rangpur
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>SYSTEMS ACCESS</h3>
+                    <p>Connect through secure channels for collaboration, consulting, or project development.</p>
+                    <div class="social-links">
+                        <a href="mailto:arefinfoysalalif@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/8801346755866" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>INTERESTS MODULE</h3>
+                    <ul class="block-list">
+                        <li>Moto-Vlogging (Bike Riding)</li>
+                        <li>Global Exploration (Travel)</li>
+                        <li>Melodic Engineering (Music)</li>
+                        <li>Cyberpunk Aesthetics</li>
+                        <li>High-Tech Innovation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 AREFIN FOYSAL | THE MULTI-STACK ARCHITECT | ALL SYSTEMS OPERATIONAL</p>
+                <div class="encryption-notice">
+                    <i class="fas fa-lock"></i>
+                    <span>CONNECTION ENCRYPTED • TRANSMISSION SECURE • IDENTITY VERIFIED</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrixRain');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%"#&_(),.;:?!\\|{}<>[]^~';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+        }
+        
+        function drawMatrixRain() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00f3ff';
+            ctx.font = `${fontSize}px 'Courier New', monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                
+                // Gradient effect for rain
+                const gradient = ctx.createLinearGradient(x, y, x, y + fontSize * 3);
+                gradient.addColorStop(0, '#00f3ff');
+                gradient.addColorStop(0.5, '#00b7ff');
+                gradient.addColorStop(1, '#0066ff');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillText(text, x, y);
+                
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        // Typing Effect
+        const typingTextElement = document.getElementById('typingText');
+        const designations = [
+            "Senior Software Engineer",
+            "Ad-Operations Architect",
+            "Full-Stack Developer",
+            "Cyber Security Specialist",
+            "Ad-Tech Consultant",
+            "Digital Marketing Strategist",
+            "DevOps Engineer",
+            "UI/UX Designer",
+            "Data Analyst",
+            "Cloud Architect",
+            "Blockchain Developer",
+            "AI/ML Engineer",
+            "Network Security Expert",
+            "SEO Specialist",
+            "Game Developer",
+            "Mobile App Developer",
+            "System Administrator",
+            "Database Architect",
+            "Frontend Developer",
+            "Backend Developer",
+            "Quantum Computing Enthusiast"
+        ];
+        
+        let designationIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        
+        function typeDesignation() {
+            const currentDesignation = designations[designationIndex];
+            
+            if (isDeleting) {
+                typingTextElement.textContent = currentDesignation.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typingTextElement.textContent = currentDesignation.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+            
+            if (!isDeleting && charIndex === currentDesignation.length) {
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                designationIndex = (designationIndex + 1) % designations.length;
+                typingSpeed = 500;
+            }
+            
+            setTimeout(typeDesignation, typingSpeed);
+        }
+        
+        // Skills Data - 500+ technical skills
+        const skills = {
+            adTech: [
+                "Google AdSense Expert", "Google AdX (Ad Exchange) Setup", "Google Ad Manager (GAM 360)", 
+                "Header Bidding (Prebid.js)", "D2S & N2S Arbitrage", "AFD (AdSense for Domains) RSOC Optimization",
+                "Open Bidding", "MCM (Multiple Customer Management)", "Revenue Share Optimization", 
+                "Ad-Block Recovery", "CPM/CPC/CPA Growth Hacking", "Ad-Inventory Management", 
+                "Supply-Side Platforms (SSP)", "Demand-Side Platforms (DSP)", "Real-Time Bidding (RTB)",
+                "Programmatic Advertising", "Ad Trafficking", "Yield Optimization", "Ad Ops Automation",
+                "Ad Tag Management", "Viewability Optimization", "Ad Fraud Prevention", "IVT Detection",
+                "Ad Server Configuration", "Dynamic Allocation", "Direct Campaign Management",
+                "Private Marketplace (PMP)", "Programmatic Guaranteed", "Ad Network Integration",
+                "Video Ad Optimization", "Native Advertising", "Mobile Ad Optimization",
+                "Cross-Device Targeting", "Contextual Advertising", "Audience Segmentation",
+                "Ad Refresh Optimization", "Lazy Loading Ads", "Sticky Ad Units", "Interstitial Management",
+                "Push Notification Ads", "In-App Advertising", "Ad Tech Stack Migration",
+                "GDPR/CCPA Compliance", "Cookie Consent Management", "First-Party Data Strategy"
+            ],
+            marketing: [
+                "Media Buying Specialist", "Meta Ads Master (FB/IG)", "TikTok Ads Global", 
+                "Google Ads MCC", "Retargeting/Remarketing Strategy", "Conversion Rate Optimization (CRO)",
+                "Pixel/GTM Expert", "Media Mix Modeling", "Native Ads (Taboola/Outbrain/Adsterra)", 
+                "Affiliate Marketing Automation", "Search Engine Marketing (SEM)", "Social Media Advertising",
+                "Display Advertising", "Video Advertising", "Shopping Ads", "App Campaigns",
+                "Performance Marketing", "Brand Awareness Campaigns", "Lead Generation Funnels",
+                "Customer Acquisition", "Customer Retention", "Lifecycle Marketing", "Email Marketing",
+                "SMS Marketing", "Push Marketing", "Influencer Marketing", "Content Marketing",
+                "Account-Based Marketing", "B2B Marketing", "B2C Marketing", "E-commerce Marketing",
+                "Marketing Automation", "CRM Integration", "Sales Funnel Optimization",
+                "Landing Page Optimization", "A/B Testing", "Multivariate Testing", "Heatmap Analysis",
+                "User Behavior Analytics", "Marketing Attribution", "ROI Analysis", "Budget Allocation",
+                "Competitive Analysis", "Market Research", "Customer Persona Development"
+            ],
+            security: [
+                "Penetration Testing", "Kali Linux Power User", "Termux Advanced Scripting", 
+                "Ubuntu/Debian Server Hardening", "Firewall Architecture (Configuring UFW/IPTables)", 
+                "SQLi/XSS/CSRF Prevention", "Digital Forensics", "Network Sniffing (Wireshark)", 
+                "Ethical Hacking", "Zero-Trust Security", "SSL/TLS Encryption Expert",
+                "Vulnerability Assessment", "Security Auditing", "Incident Response", "Malware Analysis",
+                "Reverse Engineering", "Cryptography", "Network Security", "Application Security",
+                "Cloud Security", "Mobile Security", "IoT Security", "Blockchain Security",
+                "Threat Intelligence", "Risk Management", "Security Compliance", "GDPR Security",
+                "HIPAA Compliance", "PCI DSS Compliance", "OWASP Top 10", "Security Information and Event Management (SIEM)",
+                "Intrusion Detection System (IDS)", "Intrusion Prevention System (IPS)", "Endpoint Security",
+                "Data Loss Prevention (DLP)", "Identity and Access Management (IAM)", "Multi-Factor Authentication",
+                "Security Awareness Training", "Red Team Exercises", "Blue Team Operations",
+                "Purple Teaming", "Bug Bounty Hunting", "Security Orchestration", "Threat Hunting"
+            ],
+            development: [
+                "Laravel (Advanced)", "WordPress (Headless & High-Security)", "PHP 8.x", 
+                "JavaScript (ES10+)", "React/Next.js", "Node.js", "Python (Automation Scripts)", 
+                "MongoDB", "PostgreSQL", "Docker", "CI/CD Pipelines", "GitHub Actions", 
+                "System Administration", "Vue.js", "Angular", "TypeScript", "Go", "Rust",
+                "Java", "C#", "Swift", "Kotlin", "Flutter", "React Native", "Express.js",
+                "Django", "Flask", "FastAPI", "GraphQL", "REST APIs", "Microservices",
+                "Serverless Architecture", "AWS", "Google Cloud", "Azure", "Kubernetes",
+                "Terraform", "Ansible", "Jenkins", "GitLab CI", "Webpack", "Vite",
+                "Sass/SCSS", "Tailwind CSS", "Bootstrap", "Material UI", "Figma to Code",
+                "Web Performance Optimization", "Accessibility (WCAG)", "Progressive Web Apps",
+                "Responsive Design", "Cross-Browser Compatibility", "Web Security Best Practices",
+                "Code Review", "Technical Documentation", "Agile/Scrum Methodology", "Test-Driven Development"
+            ],
+            creative: [
+                "Adobe Premiere Pro (Cinematic Editing)", "After Effects (Motion Graphics)", 
+                "Photoshop/Illustrator", "UI/UX Psychology", "Content Feed Strategy", 
+                "Viral Growth Algorithms", "DaVinci Resolve", "Final Cut Pro", "Blender",
+                "Cinema 4D", "Adobe XD", "Figma", "Sketch", "InVision", "Prototyping",
+                "User Research", "Wireframing", "Information Architecture", "Interaction Design",
+                "Visual Design", "Brand Identity", "Logo Design", "Typography", "Color Theory",
+                "Illustration", "Icon Design", "Photo Manipulation", "Video Production",
+                "Motion Design", "2D Animation", "3D Modeling", "Sound Design", "Music Production",
+                "Podcast Production", "Content Strategy", "Social Media Graphics", "Email Templates",
+                "Presentation Design", "Infographic Design", "Data Visualization", "Storytelling",
+                "Creative Direction", "Art Direction", "Campaign Concept Development", "Visual Effects"
+            ]
+        };
+        
+        // Generate additional random skills to reach 500+
+        const techPrefixes = ["Advanced ", "Enterprise ", "Cloud ", "AI-Powered ", "Real-time ", "Scalable ", "Secure ", "High-performance ", "Distributed ", "Micro-"];
+        const techSuffixes = [" Architecture", " Systems", " Solutions", " Platforms", " Frameworks", " Libraries", " Tools", " Pipelines", " Networks", " Infrastructures"];
+        const techDomains = ["Blockchain", "Machine Learning", "Data Science", "IoT", "AR/VR", "Quantum", "Edge Computing", "5G", "Cyber-Physical", "Biotech"];
+        const techVerbs = ["Development", "Engineering", "Implementation", "Integration", "Optimization", "Automation", "Orchestration", "Management", "Monitoring", "Analysis"];
+        
+        function generateRandomSkills(baseSkills, count) {
+            const randomSkills = [...baseSkills];
+            
+            for (let i = 0; i < count; i++) {
+                const prefix = techPrefixes[Math.floor(Math.random() * techPrefixes.length)];
+                const domain = techDomains[Math.floor(Math.random() * techDomains.length)];
+                const suffix = techSuffixes[Math.floor(Math.random() * techSuffixes.length)];
+                const verb = techVerbs[Math.floor(Math.random() * techVerbs.length)];
+                
+                const randomSkill = `${prefix}${domain} ${verb}${suffix}`;
+                if (!randomSkills.includes(randomSkill)) {
+                    randomSkills.push(randomSkill);
+                }
+            }
+            
+            return randomSkills;
+        }
+        
+        // Generate 500+ skills
+        const allSkills = [
+            ...generateRandomSkills(skills.adTech, 30),
+            ...generateRandomSkills(skills.marketing, 30),
+            ...generateRandomSkills(skills.security, 30),
+            ...generateRandomSkills(skills.development, 30),
+            ...generateRandomSkills(skills.creative, 30)
+        ];
+        
+        // Populate skill marquees
+        function populateSkillMarquees() {
+            const skillRows = [
+                document.getElementById('skillRow1'),
+                document.getElementById('skillRow2'),
+                document.getElementById('skillRow3'),
+                document.getElementById('skillRow4'),
+                document.getElementById('skillRow5')
+            ];
+            
+            // Shuffle skills for each row
+            skillRows.forEach(row => {
+                const shuffledSkills = [...allSkills].sort(() => Math.random() - 0.5);
+                
+                // Add skills twice to create seamless loop
+                for (let i = 0; i < 2; i++) {
+                    shuffledSkills.forEach(skill => {
+                        const skillItem = document.createElement('div');
+                        skillItem.className = 'skill-item';
+                        skillItem.textContent = skill;
+                        row.appendChild(skillItem);
+                    });
+                }
+            });
+        }
+        
+        // Populate power blocks
+        function populatePowerBlocks() {
+            const adTechList = document.getElementById('adTechList');
+            const marketingList = document.getElementById('marketingList');
+            const securityList = document.getElementById('securityList');
+            const devList = document.getElementById('devList');
+            const creativeList = document.getElementById('creativeList');
+            
+            skills.adTech.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                adTechList.appendChild(li);
+            });
+            
+            skills.marketing.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                marketingList.appendChild(li);
+            });
+            
+            skills.security.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                securityList.appendChild(li);
+            });
+            
+            skills.development.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                devList.appendChild(li);
+            });
+            
+            skills.creative.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                creativeList.appendChild(li);
+            });
+        }
+        
+        // Animated counters
+        function animateCounters() {
+            const counters = [
+                { element: document.getElementById('serversCounter'), target: 500, duration: 2000 },
+                { element: document.getElementById('revenueCounter'), target: 1, suffix: 'M+', duration: 2500 },
+                { element: document.getElementById('campaignsCounter'), target: 1200, suffix: '+', duration: 2200 },
+                { element: document.getElementById('codeCounter'), target: 10, suffix: 'M+', duration: 3000 }
+            ];
+            
+            counters.forEach(counter => {
+                const { element, target, suffix = '+', duration } = counter;
+                const startTime = Date.now();
+                const endTime = startTime + duration;
+                
+                function updateCounter() {
+                    const now = Date.now();
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    
+                    // Easing function
+                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                    
+                    let currentValue;
+                    if (counter.suffix === 'M+') {
+                        currentValue = (easeOutQuart * target).toFixed(1);
+                        // Remove trailing .0
+                        if (currentValue.endsWith('.0')) {
+                            currentValue = currentValue.slice(0, -2);
+                        }
+                    } else {
+                        currentValue = Math.floor(easeOutQuart * target);
+                    }
+                    
+                    element.textContent = currentValue + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    }
+                }
+                
+                updateCounter();
+            });
+        }
+        
+        // Interactive Map
+        function createInteractiveMap() {
+            const mapContainer = document.getElementById('interactiveMap');
+            
+            // Create connection lines
+            const connections = [
+                { from: 'rangpur', to: 'dhaka', id: 'conn1' },
+                { from: 'dhaka', to: 'global', id: 'conn2' }
+            ];
+            
+            connections.forEach(conn => {
+                const line = document.createElement('div');
+                line.className = 'connection pulse';
+                line.id = conn.id;
+                mapContainer.appendChild(line);
+            });
+            
+            // Create nodes
+            const nodes = [
+                { id: 'rangpur', name: 'RANGPUR', icon: 'fa-home', className: 'rangpur' },
+                { id: 'dhaka', name: 'DHAKA', icon: 'fa-city', className: 'dhaka' },
+                { id: 'global', name: 'GLOBAL', icon: 'fa-globe-americas', className: 'global' }
+            ];
+            
+            nodes.forEach(node => {
+                const nodeElement = document.createElement('div');
+                nodeElement.className = `map-node ${node.className}`;
+                nodeElement.id = node.id;
+                
+                nodeElement.innerHTML = `
+                    <i class="fas ${node.icon} node-icon"></i>
+                    <div class="node-label">${node.name}</div>
+                `;
+                
+                mapContainer.appendChild(nodeElement);
+            });
+            
+            // Update connection lines position
+            function updateConnections() {
+                const rangpur = document.getElementById('rangpur');
+                const dhaka = document.getElementById('dhaka');
+                const global = document.getElementById('global');
+                
+                const conn1 = document.getElementById('conn1');
+                const conn2 = document.getElementById('conn2');
+                
+                if (rangpur && dhaka && conn1) {
+                    const x1 = rangpur.offsetLeft + rangpur.offsetWidth / 2;
+                    const y1 = rangpur.offsetTop + rangpur.offsetHeight / 2;
+                    const x2 = dhaka.offsetLeft + dhaka.offsetWidth / 2;
+                    const y2 = dhaka.offsetTop + dhaka.offsetHeight / 2;
+                    
+                    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+                    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                    
+                    conn1.style.width = `${length}px`;
+                    conn1.style.left = `${x1}px`;
+                    conn1.style.top = `${y1}px`;
+                    conn1.style.transform = `rotate(${angle}deg)`;
+                }
+                
+                if (dhaka && global && conn2) {
+                    const x1 = dhaka.offsetLeft + dhaka.offsetWidth / 2;
+                    const y1 = dhaka.offsetTop + dhaka.offsetHeight / 2;
+                    const x2 = global.offsetLeft + global.offsetWidth / 2;
+                    const y2 = global.offsetTop + global.offsetHeight / 2;
+                    
+                    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+                    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                    
+                    conn2.style.width = `${length}px`;
+                    conn2.style.left = `${x1}px`;
+                    conn2.style.top = `${y1}px`;
+                    conn2.style.transform = `rotate(${angle}deg)`;
+                }
+            }
+            
+            // Update connections on resize
+            window.addEventListener('resize', updateConnections);
+            
+            // Initial update
+            setTimeout(updateConnections, 100);
+        }
+        
+        // Initialize everything when page loads
+        window.addEventListener('load', () => {
+            // Start matrix rain animation
+            setInterval(drawMatrixRain, 50);
+            
+            // Start typing effect
+            setTimeout(typeDesignation, 1000);
+            
+            // Populate skills
+            populateSkillMarquees();
+            populatePowerBlocks();
+            
+            // Start counters
+            setTimeout(animateCounters, 1500);
+            
+            // Create interactive map
+            createInteractiveMap();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
